@@ -21,12 +21,12 @@ SECRET_KEY = os.environ.get(
     "django-insecure-^wgd3myc9zodm0cj93i^zd+(mko!3na%oem+a!34o&^0#mq^f0"
 )
 
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = False
 
 # -----------------------
 # ALLOWED HOSTS
 # -----------------------
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", ".vercel.app,127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = ['InventoryPro.pythonanywhere.com']
 
 # -----------------------
 # INSTALLED APPS
@@ -87,25 +87,12 @@ WSGI_APPLICATION = "InventoryPro.wsgi.application"
 # -----------------------
 # DATABASE CONFIGURATION
 # -----------------------
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-if DATABASE_URL:
-    # ✅ Neon / Production
-    DATABASES = {
-        "default": dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=60,  # Use short-lived connections for serverless DB
-            ssl_require=True
-        )
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    # ✅ Local Development fallback (SQLite)
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+}
 
 # -----------------------
 # PASSWORD VALIDATION
@@ -129,7 +116,7 @@ USE_TZ = True
 # STATIC FILES
 # -----------------------
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "images")]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # -----------------------
@@ -154,3 +141,5 @@ if not DEBUG:
 # DEFAULT AUTO FIELD
 # -----------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
