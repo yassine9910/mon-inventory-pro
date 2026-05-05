@@ -21,12 +21,12 @@ SECRET_KEY = os.environ.get(
     "django-insecure-^wgd3myc9zodm0cj93i^zd+(mko!3na%oem+a!34o&^0#mq^f0"
 )
 
-DEBUG = False
+DEBUG = True
 
 # -----------------------
 # ALLOWED HOSTS
 # -----------------------
-ALLOWED_HOSTS = ['InventoryPro.pythonanywhere.com']
+ALLOWED_HOSTS = ['*']
 
 # -----------------------
 # INSTALLED APPS
